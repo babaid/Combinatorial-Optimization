@@ -10,6 +10,7 @@ The basic problems which I want to solve in this repo are the following:
 + Minimum Spanning Tree (MST) problems (Prim, Kruskal)
 + Maximum Flow problems
 + Minimum Flow problems
++ some more coming...
 
 # On representations of graphs
 Assuming some prior mathematical knowledge of graphs, in practice A graph G can be usually be represented in three ways:
