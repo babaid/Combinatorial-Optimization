@@ -8,7 +8,7 @@ I intend not to use libraries for Graphs also for this same reason.
 The basic problems which I want to solve in this repo are the following:
 + Shortest Path problems (Dijkstra, etc.)
 + Minimum Spanning Tree (MST) problems (Prim, Kruskal)
-+ Maximum Flow problems
++ Maximum Flow problems (Ford-Fulkerson)
 + Minimum Flow problems
 + some more coming...
 
