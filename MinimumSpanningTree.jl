@@ -91,7 +91,7 @@ end
 
 function mst_kruskal(adj_mat)
   """
-    Kruskal's algorithm on a directed graph
+    Kruskal's algorithm on a graph
   """
   E_G = findall(x->x .!= Inf, adj_mat)
   V_G = collect(1:size(adj_mat)[1])
@@ -125,9 +125,25 @@ function mst_kruskal(adj_mat)
 end
 
 
+#If you want to try it here are some matrices
+"""
+testmatrix1 = [ 
+                Inf 1 1 1 1;
+                Inf Inf 3 Inf 2;
+                Inf Inf Inf 4 Inf;
+                Inf Inf Inf Inf 5;
+                Inf Inf Inf Inf Inf
+              ] # solution should be a star from edge 1 to every other edge
 
+directedtestmatrix = [
+                        Inf 0.5 Inf 2 1;
+                        Inf Inf 3 Inf 2;
+                        Inf Inf 1 4 Inf;
+                        Inf Inf Inf Inf 5;
+                        Inf Inf Inf Inf Inf
+                    ] # may lead to a solution that is not traversable --> use Chi-Liu/Edmonds algorithm for directed graphs
 
-
+"""
 
 function make_symmetric_matrix(mat)
   """ Just a convenient function to make your adjacency matrix symmetric if you have written
