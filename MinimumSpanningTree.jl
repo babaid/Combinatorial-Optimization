@@ -51,12 +51,77 @@ function mst_prim_undirected(adj_mat::Matrix{Float})
 end
 
 
-#Kruskal
+# Kruskal's algrothim works by sorting the edges of the graph into ascending
+# order by their weights, and then adding edges one by one to the tree T,
+# If there is a cycle on the graph, the edge gets thrown away and the algorithm
+# continues until V(T)=V(G)
+#
+# The tricky part is implementing a recursive check for cycles on the graph.
+# In this case it is easier to work with the edge list + node list + weight list representation
 
-function check_for_cycle()
+function check_for_cycle_at(E, v, visited, parent_node=-1)
+  """ Checks for a cycle containing node v
+
+  """
+  visited[v] = true
+  for (i, edge) in enumerate(E)
+    if edge[1] == v
+      if !visited[edge[2]]
+        if check_for_cycle_at(E, edge[2], visited, parent_node)
+          return true
+        end
+	    else 
+        return true 
+      end
+	
+    end
+  end  
+  return false
 end
 
-function mst_kruskal()
+
+function check_for_any_cycle(E, V)
+  for v in V
+    if check_for_cycle_at(E, v, [false for i in V], v)
+      return true
+    end
+  end
+  return false
+end
+
+function mst_kruskal(adj_mat)
+  """
+    Kruskal's algorithm on a directed graph
+  """
+  E_G = findall(x->x .!= Inf, adj_mat)
+  V_G = collect(1:size(adj_mat)[1])
+  W_G = [adj_mat[e] for e in E]
+
+  #sort by weights
+  perm = sortperm(weights)
+
+  sorted_W = W[perm]
+  sorted_E = E[perm]
+
+  E_T = []
+  V_T = []
+  W_T = []
+  for i in 1:length(E_G)
+    if length(V_T) != length(V_G)
+      push!(E, sorted_E[i])
+      push!(V_T, sorted_E[i][1])
+      push!(W_T, sorted_W[i])
+      if check_for_any_cycle(E_T, V_G)
+        pop!(E_T)
+        pop!(V_T)
+        pop!(W_T)
+      end
+    else
+      break
+    end
+  end
+
+  return E_T, W_T
 end
 
 
@@ -71,27 +136,30 @@ function make_symmetric_matrix(mat)
   N = size(mat)[1]
   for i in 1:N
     for j in 1:N
-      if g[i, j]==Inf
-        g[i, j] = g[j, i]
-      elseif g[j, i] == Inf
-        g[j, i] = g[i, j]
+      if mat[i, j]==Inf
+        mat[i, j] = mat[j, i]
+      elseif mat[j, i] == Inf
+        mat[j, i] = mat[i, j]
       end
     end
   mat
 end
 
-
-
-
-
-
-
-
-
-
-
-
-
+function adj_mat_to_lists(adj_mat)
+  N = size(adj_mat)[1]
+  V = collect(1:N)
+  E = []
+  W = []
+  for i in 1:N
+    for j in 1:N
+      if adj_mat[i, j] != Inf
+        push!(E, (i, j))
+        push!(W, adj_mat[i, j])
+      end
+    end
+  end
+  return V, E, W
+end
 
 
 
