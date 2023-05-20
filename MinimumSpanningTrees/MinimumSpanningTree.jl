@@ -2,8 +2,8 @@
 
 
 
-function mst_prim_undirected(adj_mat::Matrix{Float})
-  """ Prim's algorithm on an adjacency matrix of an undirected weighted graph G.
+function mst_prim_undirected(adj_mat::Matrix{Float64})
+  md""" Prim's algorithm on an adjacency matrix of an undirected weighted graph G.
       
       It follows a visual solution of the problem.
       Adjacency Matrix A[i, j] = weight of connection between nodes i and j
@@ -20,9 +20,8 @@ function mst_prim_undirected(adj_mat::Matrix{Float})
         Repeat this until V(T) = V(G), (every node of G is also found in T)
         
     For this whole thing to work the elements A[i, j] of the adj. matr. have to be 
-    set to A[i, j] = Inf if they are not connected, which makes sense.
-
-"""
+    set to A[i, j] = Inf if they are not connected, which makes sense.are
+    """
   T = []
   N = size(adj_mat)[1]
   
@@ -37,8 +36,8 @@ function mst_prim_undirected(adj_mat::Matrix{Float})
   next_edge = argmin(adj_mat[rows[1], :])
   done_cols = [rows[1]]
 
+  
   while length(done_cols) <= N
-
     cols = [c for c in 1:N if !in(c, done_cols)]
     
     next_edge = argmin(adj_mat[rows, cols])
@@ -158,7 +157,9 @@ function make_symmetric_matrix(mat)
         mat[j, i] = mat[i, j]
       end
     end
-  mat
+  
+  end
+  return mat
 end
 
 function adj_mat_to_lists(adj_mat)
