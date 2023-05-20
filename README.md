@@ -35,3 +35,12 @@ can also work.
 Each representation has its advantages and disadvantages. The second representation is usually used in libraries (e.g. PyTorch Geometric) as it is sparse, therefore computationally less expensive than the others. Whereas some problems are easier to understand/visualize on an adjacency matrix, others can be implemented easier in the more mathematical formulation (1.).
 
 A nice article on representing graphs can be found [here](https://medium.com/basecs/from-theory-to-practice-representing-graphs-cfd782c5be38#:~:text=An%20adjacency%20list%20is%20the,the%20neighbors%20of%20another%20node.).
+
+
+# Usage 
+
+Only thing you need is julia(>1.8). After cloning you can either use the environment already included or simply your own. Only few standard packages are used, LinearAlgebra, Plotting stuff (Plots/Makie) and later maybe StatsBase, Distributions and Random if there will be something on random walks on graphs or something alike.
+
+
+
+
