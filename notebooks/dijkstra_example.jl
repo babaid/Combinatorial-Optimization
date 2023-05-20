@@ -8,7 +8,7 @@ using InteractiveUtils
 using LinearAlgebra
 
 # ╔═╡ fd7e1eb1-7517-4f7a-85a1-ff4c1d7a1aa1
-include("Dijkstra.jl")
+include("../ShortestPaths/Dijkstra.jl")
 
 # ╔═╡ 11244dda-1ef2-4339-bc1e-abc27d759e31
 V = collect(1:9)
