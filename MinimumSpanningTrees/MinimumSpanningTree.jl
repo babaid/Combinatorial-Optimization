@@ -123,6 +123,33 @@ function mst_kruskal(adj_mat)
   return E_T, W_T
 end
 
+#MST with bfs
+
+function mst_bfs(E, V, s)
+  """
+      Breadth first search. Given a directed, unweighted graph G = (V, E) and a starting vertex s, 
+      it computes the minimum spanning tree of that graph. 
+  """
+visited = [false for i in V]
+queue = []
+push!(queue, s)
+visited[s] = true
+MST = []
+while  !isempty(queue)
+  y = popfirst!(queue)
+  for edge in E
+    if edge[1] == y && !visited[edge[2]]
+      push!(queue, edge[2])
+      visited[edge[2]] = true
+      push!(MST, edge)
+  
+    end
+  end
+  
+  end
+return MST
+end
+
 
 #If you want to try it here are some matrices
 """
@@ -177,7 +204,6 @@ function adj_mat_to_lists(adj_mat)
   end
   return V, E, W
 end
-
 
 
 
